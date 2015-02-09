@@ -9,6 +9,9 @@ class Question(models.Model):
         return self.ques_text
     def recent(self):
         return self.pub_date >= timezone.now() - datetime.timedelta(days=1)
+    recent.admin_order_field = 'pub_date'
+    recent.boolean = True
+    recent.short_description = 'Published recently?'
 
 
 class Choice(models.Model):
