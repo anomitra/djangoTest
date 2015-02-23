@@ -8,7 +8,8 @@ class Question(models.Model):
     def __str__(self):
         return self.ques_text
     def recent(self):
-        return self.pub_date >= timezone.now() - datetime.timedelta(days=1)
+        now = timezone.now()
+        return now - datetime.timedelta(days=1) <= self.pub_date <= now
     recent.admin_order_field = 'pub_date'
     recent.boolean = True
     recent.short_description = 'Published recently?'
